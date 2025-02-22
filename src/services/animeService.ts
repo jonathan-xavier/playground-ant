@@ -23,81 +23,84 @@ import { IAnimePage } from "../interfaces/anime";
 
 const query = `
 query {
-  Media(id: 180812) {
-    id
-    title {
-      romaji
-      native
-      english
-    }
-    startDate {
-      year
-      month
-      day
-    }
-    endDate {
-      year
-      month
-      day
-    }
-    status
-    season
-    format
-    genres
-    synonyms
-    duration
-    popularity
-    episodes
-    source
-    countryOfOrigin
-    averageScore
-    description
-    coverImage {
-      extraLarge
-      color
-    }
-    trailer {
+  Page(perPage: 3) {
+    media {
       id
-      site
-      thumbnail
-    }
-    externalLinks {
-      site
-      url
-    }
-    rankings {
-      rank
-      type
-      season
-    }
-    studios {
-      nodes {
-        name
-        siteUrl
+      title {
+        romaji
+        native
+        english
       }
-    }
-    relations {
-      edges {
-        relationType
-        node {
-          id
-          title {
-            romaji
-            native
-            english
-          }
+      startDate {
+        year
+        month
+        day
+      }
+      endDate {
+        year
+        month
+        day
+      }
+      status
+      season
+      format
+      genres
+      synonyms
+      duration
+      popularity
+      episodes
+      source
+      countryOfOrigin
+      averageScore
+      description
+      coverImage {
+        extraLarge
+        color
+      }
+      trailer {
+        id
+        site
+        thumbnail
+      }
+      externalLinks {
+        site
+        url
+      }
+      rankings {
+        rank
+        type
+        season
+      }
+      studios {
+        nodes {
+          name
           siteUrl
         }
       }
-    }
-    airingSchedule {
-      nodes {
-        episode
-        airingAt
+      relations {
+        edges {
+          relationType
+          node {
+            id
+            title {
+              romaji
+              native
+              english
+            }
+            siteUrl
+          }
+        }
+      }
+      airingSchedule {
+        nodes {
+          episode
+          airingAt
+        }
       }
     }
   }
 }
+
 `
 ;
 const getSearchAnime = async (searchQuery: string) => {
@@ -117,9 +120,8 @@ const getAllAnimeAl = async () => {
       },
     }
   );
-  console.log(data)
     
-  return data.data.Media;
+  return data?.data?.Page?.media ?? [];
 };
 
 export { getSearchAnime, getAllAnimeAl };

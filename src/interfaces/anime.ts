@@ -29,7 +29,9 @@ export type IAnimeList = {
 
 export type IAnimePage = {
   data: {
-    Media: Anime[];
+    Page: {
+      media:Anime[];
+    } 
   };
 };
 
