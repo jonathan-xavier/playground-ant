@@ -1,16 +1,13 @@
-import UseAnt from "./pages/useant/UseAnt"
-
-
+import CardAnime from "./pages/CardPage/CardAnime";
+import { Header } from "./pages/HeaderPage/Header";
 
 function App() {
-  
-
   return (
     <>
-      <UseAnt/>
-    
+      <Header />
+      <CardAnime />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
