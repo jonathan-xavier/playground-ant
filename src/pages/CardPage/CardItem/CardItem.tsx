@@ -7,6 +7,7 @@ const Container = styled.div`
   gap: 1rem;
   background: #fafcfc;
   min-width: 450px;
+  max-width: 450px;
   height: 275px;
   border-radius: 3px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
@@ -18,7 +19,7 @@ const ContainerItem = styled.div`
   width: 100%;
 
   img {
-    width: 42%;
+    width: 200px;
     height: 100%;
     border-radius: 5px 0 0 5px;
   }
@@ -26,9 +27,9 @@ const ContainerItem = styled.div`
 
 const Cover = styled.div`
   z-index: 1;
-  margin-left: -12.8rem;
+  margin-left: -13.5rem;
   margin-top: 10.3rem;
-  width: 42%;
+  width: 200px;
   height: 40%;
   color: white;
   font-weight: bold;
@@ -40,6 +41,8 @@ const Cover = styled.div`
 `;
 
 const TextCard = styled.div`
+  width: 45%;
+  height: 60%;
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -54,6 +57,12 @@ const styleTextSummer: React.CSSProperties = {
 const styleSubtitle: React.CSSProperties = {
   color: "#748899",
 };
+
+const styleDescription: React.CSSProperties = {
+  paddingTop: '1rem',
+  fontSize: '.8rem',
+  color: '#8ba0b2',
+}
 
 const CardItem: React.FC<Anime> = ({ ...item }) => {
 
@@ -73,6 +82,12 @@ const CardItem: React.FC<Anime> = ({ ...item }) => {
       .join("")    
   }
 
+  const resumeText = (text: string, limit: number) => {
+    return text.length > limit ? text.slice(0, limit) + "..." : text;
+  }
+
+  
+
   return (
     <Container>
       <ContainerItem>
@@ -84,7 +99,7 @@ const CardItem: React.FC<Anime> = ({ ...item }) => {
 
           <span style={styleSubtitle}>{`${capitalize(item.format)}  
           ${showEpOrTime(item.episodes,item.duration)}`}</span>
-          {/* <span>{item.description}</span> */}
+          <span style={styleDescription}>{resumeText(item.description, 150) }</span>
         </TextCard>
       </ContainerItem>
     </Container>
