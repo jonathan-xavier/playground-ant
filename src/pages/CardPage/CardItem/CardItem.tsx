@@ -40,17 +40,39 @@ const Cover = styled.div`
 `;
 
 const TextCard = styled.div`
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
 `;
 
 const styleTextSummer: React.CSSProperties = {
-  color: '#647380',
-  fontWeight: '600', 
-  letterSpacing: '.02em',
-}
+  color: "#647380",
+  fontWeight: "600",
+  letterSpacing: ".02em",
+};
+
+const styleSubtitle: React.CSSProperties = {
+  color: "#748899",
+};
 
 const CardItem: React.FC<Anime> = ({ ...item }) => {
+
+  const showEpOrTime = (ep: number, time: number) => {
+    const timeHour = Math.floor(time / 60);
+    const remainingMinuts = time % 60;
+
+    return ep > 1
+      ? `${ep} episodes`
+      : `${timeHour} hour, ${remainingMinuts} mins`;
+  };
+
+  const capitalize = (text: string) => {
+      return text.toLowerCase()
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join("")    
+  }
+
   return (
     <Container>
       <ContainerItem>
@@ -58,13 +80,10 @@ const CardItem: React.FC<Anime> = ({ ...item }) => {
         <Cover>{item.title.english}</Cover>
 
         <TextCard>
-          <span style={styleTextSummer}>{`${item.season
-            .toLowerCase()
-            .split(" ")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join("")} ${item.startDate.year}`}</span>
+          <span style={styleTextSummer}>{`${capitalize(item.season)} ${item.startDate.year}`}</span>
 
-          <span>{item.episodes}</span>
+          <span style={styleSubtitle}>{`${capitalize(item.format)}  
+          ${showEpOrTime(item.episodes,item.duration)}`}</span>
           {/* <span>{item.description}</span> */}
         </TextCard>
       </ContainerItem>
